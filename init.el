@@ -24,6 +24,30 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(set-frame-font "DejaVu Sans Mono-8")
+
+(blink-cursor-mode -1)
+
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+(setq inhibit-startup-screen t)
+
+(setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-preserve-screen-position 1)
+
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
+
+(setq require-final-newline t)
+
+(global-auto-revert-mode t)
+
 (use-package exec-path-from-shell
   :ensure t
   :config
@@ -58,6 +82,7 @@
 (use-package clj-refactor
   :ensure t
   :init
+  (setq cljr-warn-on-eval nil)
   (add-hook 'clojure-mode-hook 'clj-refactor-mode)
   :config
   (cljr-add-keybindings-with-prefix "C-c C-m")
@@ -123,3 +148,8 @@
   :ensure t
   :config
   (global-git-gutter-mode t))
+
+(use-package company
+  :ensure t
+  :config
+  (global-company-mode))
