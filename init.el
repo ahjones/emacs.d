@@ -73,7 +73,8 @@
   (add-hook 'clojure-mode-hook #'paredit-mode)
   (add-hook 'clojure-mode-hook #'subword-mode)
   (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'clojure-mode-hook #'clojure-config))
+  (add-hook 'clojure-mode-hook #'clojure-config)
+  (add-hook 'clojure-mode-hook #'eldoc-mode))
 
 (use-package cider
   :ensure t
@@ -151,5 +152,8 @@
 
 (use-package company
   :ensure t
+  :init
+  (setq company-idle-delay 0.1)
+  (setq company-minimum-prefix-length 2)
   :config
   (global-company-mode))
