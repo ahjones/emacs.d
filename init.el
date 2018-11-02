@@ -157,3 +157,6 @@
   (setq company-minimum-prefix-length 2)
   :config
   (global-company-mode))
+
+(use-package markdown-mode
+  :ensure t)
