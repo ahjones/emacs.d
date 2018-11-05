@@ -99,7 +99,9 @@
   :ensure t)
 
 (use-package ace-jump-mode
-  :ensure t)
+  :ensure t
+  :bind (("C-c SPC" . ace-jump-mode)
+         ("C-x SPC" . ace-jump-mode-pop-mark)))
 
 (use-package restclient
   :ensure t)
