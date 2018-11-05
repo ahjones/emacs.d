@@ -54,6 +54,8 @@
    (interactive)
    (find-file "~/.emacs.d/init.el")))
 
+(global-hl-line-mode 1)
+
 (use-package exec-path-from-shell
   :ensure t
   :config
