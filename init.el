@@ -48,6 +48,12 @@
 
 (global-auto-revert-mode t)
 
+(global-set-key
+ (kbd "<f12>")
+ (lambda ()
+   (interactive)
+   (find-file "~/.emacs.d/init.el")))
+
 (use-package exec-path-from-shell
   :ensure t
   :config
