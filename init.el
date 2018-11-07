@@ -86,7 +86,17 @@
 
 (use-package cider
   :ensure t
-  :hook clojure-setup)
+  :hook clojure-setup
+  :init
+  (setq cider-repl-pop-to-buffer-on-connect nil)
+  :config
+  (add-hook 'cider-repl-mode-hook #'eldoc-mode)
+  (add-hook 'cider-repl-mode-hook #'paredit-mode)
+  (add-hook 'cider-repl-mode-hook #'subword-mode)
+  (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode)
+  (setq cider-repl-use-pretty-printing t)
+  (setq cider-repl-print-length 10)
+  (setq cider-repl-print-level 3))
 
 (use-package clj-refactor
   :ensure t
