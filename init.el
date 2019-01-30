@@ -8,6 +8,7 @@
 (setq package-archives
       '(("gnu" . "https://elpa.gnu.org/packages/")
         ("melpa" . "https://melpa.org/packages/")
+	("melpa-stable" . "https://stable.melpa.org/packages/")
         ("org" . "http://orgmode.org/elpa/")))
 (package-initialize)
 
@@ -48,6 +49,8 @@
 
 (global-auto-revert-mode t)
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 (global-set-key
  (kbd "<f12>")
  (lambda ()
@@ -73,6 +76,7 @@
 
 (use-package clojure-mode
   :ensure t
+  :pin melpa-stable
   :config
   (defun clojure-config ()
     "Configure clojure mode"
@@ -87,6 +91,7 @@
 (use-package cider
   :ensure t
   :hook clojure-setup
+  :pin melpa-stable
   :init
   (setq cider-repl-pop-to-buffer-on-connect nil)
   :config
@@ -95,18 +100,19 @@
   (add-hook 'cider-repl-mode-hook #'subword-mode)
   (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode)
   (setq cider-repl-use-pretty-printing t)
-  (setq cider-repl-print-length 10)
-  (setq cider-repl-print-level 3))
+  (setq cider-repl-print-length 50)
+  (setq cider-repl-print-level 10))
 
 (use-package clj-refactor
   :ensure t
+  :pin melpa-stable
   :init
   (setq cljr-warn-on-eval nil)
   (add-hook 'clojure-mode-hook 'clj-refactor-mode)
   :config
   (cljr-add-keybindings-with-prefix "C-c C-m")
   :diminish clj-refactor-mode)
-  
+
 (use-package solarized-theme
   :ensure t)
 
@@ -154,7 +160,9 @@
 
 (use-package rg
   :ensure t
-  :ensure-system-package rg)
+  :ensure-system-package rg
+  :config
+  (rg-enable-default-bindings))
 
 (use-package magit
   :ensure t
@@ -205,4 +213,3 @@
   (global-set-key (kbd "C-x C-3") 'split-window-right)
   (global-set-key (kbd "C-x C-0") 'delete-window)
   (define-key god-local-mode-map (kbd ".") 'repeat))
-
