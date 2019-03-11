@@ -59,6 +59,16 @@
 
 (global-hl-line-mode 1)
 
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+
+(setq org-capture-templates
+      '(("j" "Journal" entry (file+olp+datetree "~/org/ag.org" "Journal")
+         "* %?\nEntered on %U\n  %i\n  %a\n")))
+
+(put 'downcase-region 'disabled nil)
+
 (use-package exec-path-from-shell
   :ensure t
   :config
