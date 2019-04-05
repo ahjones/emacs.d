@@ -2,6 +2,7 @@
 
 (setq custom-file "~/.emacs.d/user-lisp/customised.el")
 (load custom-file)
+(load "~/.emacs.d/user-lisp/phrasebook-mode.el")
 
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -65,7 +66,12 @@
 
 (setq org-capture-templates
       '(("j" "Journal" entry (file+olp+datetree "~/org/ag.org" "Journal")
-         "* %?\nEntered on %U\n  %i\n  %a\n")))
+         "* %?\n  %i\n  %a\n")
+        ("i" "Ideas" entry (file+olp "~/org/ag.org" "Ideas")
+         "* %?\nEntered on %U\n  %i\n")
+        ("c" "Check item for clocked task" checkitem (clock))))
+
+(setq org-clock-idle-time 10)
 
 (put 'downcase-region 'disabled nil)
 
@@ -84,6 +90,9 @@
 (use-package rainbow-delimiters
   :ensure t)
 
+(use-package aggressive-indent
+  :ensure t)
+
 (use-package clojure-mode
   :ensure t
   :pin melpa-stable
@@ -96,13 +105,15 @@
   (add-hook 'clojure-mode-hook #'subword-mode)
   (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'clojure-mode-hook #'clojure-config)
-  (add-hook 'clojure-mode-hook #'eldoc-mode))
+  (add-hook 'clojure-mode-hook #'eldoc-mode)
+  (add-hook 'clojure-mode-hook #'aggressive-indent-mode))
 
 (use-package cider
   :ensure t
   :hook clojure-setup
   :pin melpa-stable
   :init
+  (setq cider-print-fn "puget")
   (setq cider-repl-pop-to-buffer-on-connect nil)
   :config
   (add-hook 'cider-repl-mode-hook #'eldoc-mode)
@@ -205,3 +216,6 @@
 (use-package multiple-cursors
   :ensure t
   :bind (("C-S-c C-S-c" . mc/edit-lines)))
+
+(use-package haskell-mode
+  :ensure t)
