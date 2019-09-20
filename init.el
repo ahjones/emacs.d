@@ -26,7 +26,8 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(set-frame-font "DejaVu Sans Mono-8")
+;;(set-frame-font "Input 9")
+(set-frame-font "DejaVu Sans Mono 8")
 
 (blink-cursor-mode -1)
 
@@ -93,6 +94,21 @@
 (use-package aggressive-indent
   :ensure t)
 
+(defun clojure-indentation ()
+  (define-clojure-indent
+    (defroutes 'defun)
+    (GET 2)
+    (POST 2)
+    (PUT 2)
+    (DELETE 2)
+    (HEAD 2)
+    (ANY 2)
+    (OPTIONS 2)
+    (PATCH 2)
+    (rfn 2)
+    (let-routes 1)
+    (context 2)))
+;; (add-hook 'clojure-mode-hook #'clojure-indentation)
 (use-package clojure-mode
   :ensure t
   :pin melpa-stable
@@ -106,7 +122,8 @@
   (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'clojure-mode-hook #'clojure-config)
   (add-hook 'clojure-mode-hook #'eldoc-mode)
-  (add-hook 'clojure-mode-hook #'aggressive-indent-mode))
+  (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+  )
 
 (use-package cider
   :ensure t
@@ -135,7 +152,9 @@
   :diminish clj-refactor-mode)
 
 (use-package solarized-theme
-  :ensure t)
+  :ensure t
+  :config
+  (load-theme 'solarized-dark t))
 
 (use-package ace-jump-mode
   :ensure t
@@ -202,7 +221,7 @@
 (use-package company
   :ensure t
   :init
-  (setq company-idle-delay 0.1)
+  (setq company-idle-delay 0.5)
   (setq company-minimum-prefix-length 2)
   :config
   (global-company-mode))
@@ -218,4 +237,14 @@
   :bind (("C-S-c C-S-c" . mc/edit-lines)))
 
 (use-package haskell-mode
+  :ensure t)
+
+(use-package expand-region
+  :ensure t
+  :config (global-set-key (kbd "C-=") 'er/expand-region))
+
+(use-package origami
+  :ensure t)
+
+(use-package swiper
   :ensure t)
