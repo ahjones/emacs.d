@@ -243,8 +243,6 @@
   :ensure t
   :config (global-set-key (kbd "C-=") 'er/expand-region))
 
-(use-package origami
-  :ensure t)
-
 (use-package swiper
-  :ensure t)
+  :ensure t
+  :config (global-set-key (kbd "C-s") 'swiper))
