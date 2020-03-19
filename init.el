@@ -26,7 +26,6 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;;(set-frame-font "Input 9")
 (set-frame-font "DejaVu Sans Mono 8")
 
 (blink-cursor-mode -1)
