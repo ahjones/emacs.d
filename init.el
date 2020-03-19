@@ -245,3 +245,35 @@
 (use-package swiper
   :ensure t
   :config (global-set-key (kbd "C-s") 'swiper))
+
+(use-package racket-mode
+  :ensure t)
+
+(use-package slime
+  :ensure t
+  :init
+  (setq inferior-lisp-program "sbcl"))
+
+(use-package zetteldeft
+  :ensure t
+  :after deft
+  :init
+  (setq deft-directory (concat org-directory "/zetteldeft"))
+  (setq deft-recursive t)
+  :bind (("C-c d d" . deft)
+         ("C-c d D" . zetteldeft-deft-new-search)
+         ("C-c d R" . deft-refresh)
+         ("C-c d s" . zetteldeft-search-at-point)
+         ("C-c d c" . zetteldeft-search-current-id)
+         ("C-c d f" . zetteldeft-follow-link)
+         ("C-c d F" . zetteldeft-avy-file-search-ace-window)
+         ("C-c d l" . zetteldeft-avy-link-search)
+         ("C-c d t" . zetteldeft-avy-tag-search)
+         ("C-c d T" . zetteldeft-tag-buffer)
+         ("C-c d i" . zetteldeft-find-file-id-insert)
+         ("C-c d I" . zetteldeft-find-file-full-title-insert)
+         ("C-c d o" . zetteldeft-find-file)
+         ("C-c d n" . zetteldeft-new-file)
+         ("C-c d N" . zetteldeft-new-file-and-link)
+         ("C-c d r" . zetteldeft-file-rename)
+         ("C-c d x" . zetteldeft-count-words)))
