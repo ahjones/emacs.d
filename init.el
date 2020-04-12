@@ -26,7 +26,7 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(set-frame-font "DejaVu Sans Mono 8")
+(set-frame-font "DejaVu Sans Mono 10")
 
 (blink-cursor-mode -1)
 
@@ -254,12 +254,19 @@
   :init
   (setq inferior-lisp-program "sbcl"))
 
+(use-package avy
+  :ensure t)
+
+(use-package deft
+  :ensure t)
+
 (use-package zetteldeft
   :ensure t
-  :after deft
   :init
-  (setq deft-directory (concat org-directory "/zetteldeft"))
-  (setq deft-recursive t)
+  (progn
+    (setq deft-directory (concat org-directory "/zetteldeft/"))
+    (setq deft-default-extension "org")
+    (setq deft-recursive t))
   :bind (("C-c d d" . deft)
          ("C-c d D" . zetteldeft-deft-new-search)
          ("C-c d R" . deft-refresh)
@@ -277,3 +284,6 @@
          ("C-c d N" . zetteldeft-new-file-and-link)
          ("C-c d r" . zetteldeft-file-rename)
          ("C-c d x" . zetteldeft-count-words)))
+
+(use-package rust-mode
+  :ensure t)

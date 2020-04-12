@@ -36,13 +36,27 @@
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(hl-paren-colors (quote ("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900")))
+ '(lsp-ui-doc-border "#93a1a1")
  '(magit-diff-use-overlays nil)
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (zetteldeft typescript-mode request slime racket-mode intero haskell-mode god-mode terraform-mode markdown-mode company git-gutter undo-tree magit rg use-package-ensure-system-package projectile helm color-theme-sanityinc-tomorrow which-key smart-mode-line better-defaults restclient ace-jump-mode solarized-theme clj-refactor cider clojure-mode rainbow-delimiters yasnippet paredit exec-path-from-shell use-package))))
+    (rust-mode avy swiper expand-region zetteldeft typescript-mode request slime racket-mode intero haskell-mode god-mode terraform-mode markdown-mode company git-gutter undo-tree magit rg use-package-ensure-system-package projectile helm color-theme-sanityinc-tomorrow which-key smart-mode-line better-defaults restclient ace-jump-mode solarized-theme clj-refactor cider clojure-mode rainbow-delimiters yasnippet paredit exec-path-from-shell use-package)))
+ '(pos-tip-background-color "#073642")
+ '(pos-tip-foreground-color "#93a1a1")
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(term-default-bg-color "#002b36")
+ '(term-default-fg-color "#839496")
+ '(vc-annotate-background-mode nil)
+ '(weechat-color-list
+   (quote
+    (unspecified "#002b36" "#073642" "#a7020a" "#dc322f" "#5b7300" "#859900" "#866300" "#b58900" "#0061a8" "#268bd2" "#a00559" "#d33682" "#007d76" "#2aa198" "#839496" "#657b83")))
+ '(xterm-color-names
+   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"])
+ '(xterm-color-names-bright
+   ["#002b36" "#cb4b16" "#586e75" "#657b83" "#839496" "#6c71c4" "#93a1a1" "#fdf6e3"]))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
