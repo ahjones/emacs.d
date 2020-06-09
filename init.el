@@ -1,3 +1,4 @@
+
 (add-to-list 'load-path "~/.emacs.d/user-lisp/")
 
 (setq custom-file "~/.emacs.d/user-lisp/customised.el")
@@ -65,13 +66,16 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (setq org-capture-templates
-      '(("j" "Journal" entry (file+olp+datetree "~/org/ag.org" "Journal")
-         "* %?\n  %i\n  %a\n")
-        ("i" "Ideas" entry (file+olp "~/org/ag.org" "Ideas")
+      '(("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
+         "* %?\n  %i\n")
+        ("i" "Ideas" entry (file+olp "~/org/ideas.org" "Ideas")
          "* %?\nEntered on %U\n  %i\n")
+        ("t" "Todo" entry (file+headline "~/org/todo.org" "Tasks")
+         "* TODO %?\n  %i\n")
         ("c" "Check item for clocked task" checkitem (clock))))
 
 (setq org-clock-idle-time 10)
+(setq org-agenda-files '("~/org/"))
 
 (put 'downcase-region 'disabled nil)
 
@@ -242,10 +246,6 @@
   :ensure t
   :config (global-set-key (kbd "C-=") 'er/expand-region))
 
-(use-package swiper
-  :ensure t
-  :config (global-set-key (kbd "C-s") 'swiper))
-
 (use-package racket-mode
   :ensure t)
 
@@ -260,30 +260,25 @@
 (use-package deft
   :ensure t)
 
-(use-package zetteldeft
+(use-package plantuml-mode
   :ensure t
   :init
-  (progn
-    (setq deft-directory (concat org-directory "/zetteldeft/"))
-    (setq deft-default-extension "org")
-    (setq deft-recursive t))
-  :bind (("C-c d d" . deft)
-         ("C-c d D" . zetteldeft-deft-new-search)
-         ("C-c d R" . deft-refresh)
-         ("C-c d s" . zetteldeft-search-at-point)
-         ("C-c d c" . zetteldeft-search-current-id)
-         ("C-c d f" . zetteldeft-follow-link)
-         ("C-c d F" . zetteldeft-avy-file-search-ace-window)
-         ("C-c d l" . zetteldeft-avy-link-search)
-         ("C-c d t" . zetteldeft-avy-tag-search)
-         ("C-c d T" . zetteldeft-tag-buffer)
-         ("C-c d i" . zetteldeft-find-file-id-insert)
-         ("C-c d I" . zetteldeft-find-file-full-title-insert)
-         ("C-c d o" . zetteldeft-find-file)
-         ("C-c d n" . zetteldeft-new-file)
-         ("C-c d N" . zetteldeft-new-file-and-link)
-         ("C-c d r" . zetteldeft-file-rename)
-         ("C-c d x" . zetteldeft-count-words)))
+  (setq org-plantuml-jar-path (expand-file-name "/usr/local/Cellar/plantuml/1.2020.5/libexec/plantuml.jar")))
 
-(use-package rust-mode
-  :ensure t)
+(use-package org-roam
+  :ensure t
+  :hook
+  (after-init . org-roam-mode)
+  :custom
+  (org-roam-directory "~/org/roam/")
+  (org-roam-completion-system 'ivy)
+  (org-roam-index-file "index.org")
+  :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n j" . org-roam-jump-to-index)
+               ("C-c n b" . org-roam-switch-to-buffer)
+               ("C-c n g" . org-roam-graph))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert))))
+(put 'upcase-region 'disabled nil)
